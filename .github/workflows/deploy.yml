@@ -10,10 +10,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # Pull your code from GitHub
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v2
 
-      # SSH into EC2 and deploy
       - name: SSH Deploy
         uses: appleboy/ssh-action@master
         with:
@@ -21,7 +19,7 @@ jobs:
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
-            cd /home/ubuntu/repo
+            cd /home/ubuntu/my-app
             git pull origin main
             npm install
             pm2 restart all
