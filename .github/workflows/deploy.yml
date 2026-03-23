@@ -10,8 +10,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
+      # Pull your code from GitHub
+      - uses: actions/checkout@v3
 
+      # SSH into EC2 and deploy
       - name: SSH Deploy
         uses: appleboy/ssh-action@master
         with:
