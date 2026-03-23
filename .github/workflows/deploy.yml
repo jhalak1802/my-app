@@ -16,7 +16,7 @@ jobs:
       # SSH into EC2 and deploy
       - name: SSH Deploy
         uses: appleboy/ssh-action@master
-        with:
+          with:
           host: ${{ secrets.HOST_DNS }}
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.EC2_SSH_KEY }}
