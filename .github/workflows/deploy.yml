@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # Pull your code from GitHub
+      # Pull your code from GitHub (only ONE checkout!)
       - uses: actions/checkout@v3
 
       # SSH into EC2 and deploy
