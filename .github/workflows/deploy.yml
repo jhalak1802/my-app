@@ -1,4 +1,4 @@
-name: Deploy
+name: Deploy to EC2
 
 on:
   push:
@@ -10,18 +10,27 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # Pull your code from GitHub (only ONE checkout!)
-      - uses: actions/checkout@v3
+      # Step 1: Get code from GitHub
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-      # SSH into EC2 and deploy
-      -  name: SSH Deploy
-         uses: appleboy/ssh-action@master
-         with:
-           host: ${{ secrets.HOST_DNS }}
-           username: ${{ secrets.USERNAME }}
-           key: ${{ secrets.EC2_SSH_KEY }}
-           script: |
-              cd /home/ubuntu/my-app
-              git pull origin main
-              npm install
-              pm2 restart all
+      # Step 2: Install dependencies (for test step if needed)
+      - name: Install dependencies
+        run: npm install
+
+      # Step 3: (Optional) Run tests
+      # - name: Run tests
+      #   run: npm test
+
+      # Step 4: Deploy to EC2 via SSH
+      - name: Deploy to EC2
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST_DNS }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          script: |
+            cd /home/ubuntu/my-app
+            git pull origin main
+            npm install
+            pm2 restart all
