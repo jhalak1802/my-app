@@ -14,15 +14,15 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      # Step 2: Install dependencies (for test step if needed)
+      # Step 2: Install dependencies (needed for tests)
       - name: Install dependencies
         run: npm install
 
-      # Step 3: (Optional) Run tests
-      # - name: Run tests
-      #   run: npm test
+      # Step 3: Run tests
+      - name: Run tests
+        run: npm test
 
-      # Step 4: Deploy to EC2 via SSH
+      # Step 4: Deploy to EC2 via SSH (only runs if tests pass)
       - name: Deploy to EC2
         uses: appleboy/ssh-action@master
         with:
