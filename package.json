@@ -4,14 +4,23 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+<<<<<<< HEAD
     "start": "node app.js",
     "test": "jest"
+=======
+    "test": "echo \"Error: no test specified\" && exit 1"
+>>>>>>> f054c9db8aaa75ef44816a43593845fbecb8c369
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "type": "commonjs",
+<<<<<<< HEAD
   "devDependencies": {
     "jest": "^30.3.0"
+=======
+  "dependencies": {
+    "express": "^5.2.1"
+>>>>>>> f054c9db8aaa75ef44816a43593845fbecb8c369
   }
 }
