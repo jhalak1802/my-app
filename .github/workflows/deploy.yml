@@ -19,7 +19,7 @@ jobs:
       - name: Run tests
         run: npm test
 
-      - name: SSH Deploy
+      - name: Deploy to EC2
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.HOST_DNS }}
@@ -27,6 +27,6 @@ jobs:
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
             cd /home/ubuntu/my-app
-            git pull origin main 
+            git pull origin main || git clone https://github.com/jhalak1802/my-app.git .
             npm install
-            pm2 restart all 
+            pm2 restart all || pm2 start app.js
