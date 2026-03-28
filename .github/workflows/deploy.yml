@@ -10,20 +10,16 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # Step 1: Get code from GitHub
       - name: Checkout code
         uses: actions/checkout@v2
 
-      # Step 2: Install dependencies (needed for tests)
       - name: Install dependencies
         run: npm install
 
-      # Step 3: Run tests
       - name: Run tests
         run: npm test
 
-      # Step 4: Deploy to EC2 via SSH (only runs if tests pass)
-      - name: Deploy to EC2
+      - name: SSH Deploy
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.HOST_DNS }}
@@ -31,6 +27,6 @@ jobs:
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
             cd /home/ubuntu/my-app
-            git pull origin main
+            git pull origin main || git clone<https://github.com/jhalak1802/my-app.git>.
             npm install
-            pm2 restart all
+            pm2 restart all || pm2 start app.js
