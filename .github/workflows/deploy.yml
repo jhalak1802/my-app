@@ -27,6 +27,6 @@ jobs:
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
             cd /home/ubuntu/my-app
-            git pull origin main || git clone https://github.com/jhalak1802/my-app.git .
+            git pull origin main 
             npm install
             pm2 restart all 
